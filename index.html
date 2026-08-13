@@ -81,7 +81,7 @@
       <!-- STEP 1 — WELCOME -->
       <section class="step active" data-step="1"><div class="pad">
         <h1 id="welcomeHead">How did summer futsal go?</h1>
-        <p class="sub" id="welcomeSub">Coach John here. We just wrapped the eight-week summer block, and before Regan and I plan what's next, I want your honest take — the good and the stuff we can do better. Takes about two minutes.</p>
+        <p class="sub" id="welcomeSub">Thank you for a great summer of futsal. We really enjoyed coaching your athlete, and we hope they had fun and got better. Before Regan and I plan what's next, we want your honest feedback, good and bad. Takes about two minutes.</p>
         <button class="btn" data-next>Start →</button>
       </div></section>
 
@@ -235,7 +235,7 @@
     var parentCap= data.parent ? data.parent.charAt(0).toUpperCase()+data.parent.slice(1) : "";
     if(parentCap){
       document.getElementById("welcomeSub").innerHTML =
-        "Hey "+esc(parentCap)+" — Coach John here. We just wrapped the eight-week summer block, and before Regan and I plan what's next, I want your honest take on how it went"+(childCap?" for "+esc(childCap):"")+". The good and the stuff we can do better. Takes about two minutes.";
+        "Hey "+esc(parentCap)+" — thank you for a great summer of futsal. We really enjoyed coaching "+(childCap?esc(childCap):"your athlete")+", and we hope "+(childCap?esc(childCap):"they")+" had fun and got better. Before Regan and I plan what's next, we want your honest feedback, good and bad. Takes about two minutes.";
     }
     if(childCap){
       document.getElementById("welcomeHead").textContent = "How did summer futsal go for "+childCap+"?";
