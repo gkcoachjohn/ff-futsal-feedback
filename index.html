@@ -1,0 +1,297 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Factory 5 Futsal — Summer Feedback</title>
+<meta name="description" content="Tell Coach John how summer futsal went — and what you want next season.">
+<style>
+  :root{
+    --bg:#0a0a0c; --surface:#141517; --card1:#1a1b1e; --card2:#111214; --line:#2c2e33;
+    --txt:#f4f4f6; --muted:#a6a9b0; --white:#ffffff; --accent:#ffffff; --radius:16px;
+  }
+  *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+  html,body{height:100%}
+  body{
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+    background:radial-gradient(1100px 520px at 50% -8%, #1c1d20 0%, var(--bg) 58%);
+    color:var(--txt);min-height:100dvh;display:flex;flex-direction:column;align-items:center;
+    padding:18px 14px calc(20px + env(safe-area-inset-bottom));line-height:1.45;
+  }
+  .wrap{width:100%;max-width:480px;margin:auto;display:flex;flex-direction:column;gap:16px}
+  .brandbar{display:flex;flex-direction:column;align-items:center;gap:8px}
+  .brandbar img{width:60px;height:60px;border-radius:50%;box-shadow:0 0 0 1.5px rgba(255,255,255,.28)}
+  .tag{font-size:10.5px;letter-spacing:3px;color:var(--muted);font-weight:700;text-transform:uppercase}
+  .progress{height:5px;background:#242529;border-radius:99px;overflow:hidden}
+  .progress>i{display:block;height:100%;width:0;background:var(--white);transition:width .35s ease;border-radius:99px}
+  .card{background:linear-gradient(180deg,var(--card1),var(--card2));border:1px solid var(--line);border-radius:var(--radius);
+    overflow:hidden;box-shadow:0 24px 60px rgba(0,0,0,.5)}
+  .pad{padding:24px 22px 24px}
+  .step{display:none;animation:fade .35s ease}
+  .step.active{display:block}
+  @keyframes fade{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+  h1{font-size:24px;line-height:1.18;font-weight:800;margin-bottom:10px;letter-spacing:-.4px}
+  h2{font-size:20px;font-weight:800;margin-bottom:6px;letter-spacing:-.3px}
+  .sub{color:var(--muted);font-size:15px;margin-bottom:18px}
+  .sub.small{margin-bottom:14px}
+  .qblock{margin-bottom:20px}
+  .qlabel{font-size:15.5px;font-weight:700;margin-bottom:10px;color:var(--txt)}
+  .qlabel .opt-note{display:block;font-size:12.5px;color:var(--muted);font-weight:600;margin-top:2px}
+  .rate{display:flex;gap:8px}
+  .rate button{flex:1;background:var(--surface);border:1.5px solid var(--line);color:var(--txt);
+    font-family:inherit;font-weight:800;font-size:17px;padding:13px 0;border-radius:11px;cursor:pointer;
+    transition:border-color .12s,background .12s,transform .08s}
+  .rate button:active{transform:scale(.96)}
+  .rate button.sel{background:var(--white);color:#000;border-color:var(--white)}
+  .scale-ends{display:flex;justify-content:space-between;font-size:11.5px;color:#767a82;margin-top:6px}
+  .choices{display:flex;flex-wrap:wrap;gap:8px}
+  .choices button{background:var(--surface);border:1.5px solid var(--line);color:var(--txt);
+    font-family:inherit;font-weight:700;font-size:14.5px;padding:11px 15px;border-radius:99px;cursor:pointer;
+    transition:border-color .12s,background .12s,transform .08s}
+  .choices button:active{transform:scale(.97)}
+  .choices button.sel{background:var(--white);color:#000;border-color:var(--white)}
+  textarea{width:100%;font-family:inherit;font-size:15px;color:var(--txt);background:#101113;border:1.5px solid var(--line);
+    border-radius:11px;padding:13px;resize:vertical;min-height:74px}
+  textarea:focus{outline:none;border-color:#7d818b}
+  textarea::placeholder{color:#6b6f77}
+  .btn{display:block;width:100%;border:0;cursor:pointer;font-family:inherit;font-weight:800;font-size:17px;
+    padding:16px;border-radius:12px;background:var(--white);color:#000;transition:transform .08s ease,opacity .2s;margin-top:6px}
+  .btn:active{transform:scale(.98)}
+  .btn:disabled{opacity:.6;cursor:default}
+  .back{background:none;border:0;color:var(--muted);font-family:inherit;font-size:14px;cursor:pointer;margin-top:14px;padding:6px}
+  .explain{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:14px 16px;margin-bottom:18px;font-size:13.5px;color:#dcdde0}
+  .explain b{color:var(--white)}
+  .tick{width:64px;height:64px;border-radius:50%;background:rgba(255,255,255,.08);border:2px solid var(--white);display:flex;align-items:center;justify-content:center;font-size:32px;margin:0 auto 16px}
+  .center{text-align:center}
+  .secttag{font-size:11px;letter-spacing:2px;color:var(--muted);font-weight:800;text-transform:uppercase;margin-bottom:8px}
+</style>
+</head>
+<body>
+  <div class="wrap">
+    <div class="brandbar">
+      <img src="img/logo.png" alt="Factory 5 Futsal">
+      <div class="tag">Factory 5 Futsal</div>
+    </div>
+    <div class="progress"><i id="bar"></i></div>
+
+    <div class="card">
+
+      <!-- STEP 1 — WELCOME -->
+      <section class="step active" data-step="1"><div class="pad">
+        <h1 id="welcomeHead">How did summer futsal go?</h1>
+        <p class="sub" id="welcomeSub">Coach John here. We just wrapped the eight-week summer block, and before Regan and I plan what's next, I want your honest take — the good and the stuff we can do better. Takes about two minutes.</p>
+        <button class="btn" data-next>Start →</button>
+      </div></section>
+
+      <!-- STEP 2 — THIS SUMMER: RATINGS -->
+      <section class="step" data-step="2"><div class="pad">
+        <div class="secttag">This summer</div>
+        <h2>How would you rate it?</h2>
+        <p class="sub small">Tap 1 (not great) to 5 (loved it).</p>
+
+        <div class="qblock">
+          <div class="qlabel" id="q_overall">Overall summer experience</div>
+          <div class="rate" data-field="r_overall"></div>
+        </div>
+        <div class="qblock">
+          <div class="qlabel" id="q_child">How much your athlete enjoyed it</div>
+          <div class="rate" data-field="r_child"></div>
+        </div>
+        <div class="qblock">
+          <div class="qlabel">How you felt about it as a parent</div>
+          <div class="rate" data-field="r_parent"></div>
+        </div>
+        <div class="qblock">
+          <div class="qlabel">Location: TOA</div>
+          <div class="rate" data-field="r_toa"></div>
+        </div>
+        <div class="qblock">
+          <div class="qlabel">Location: Legacy Courts</div>
+          <div class="rate" data-field="r_legacy"></div>
+        </div>
+        <div class="qblock">
+          <div class="qlabel">Anything you want to add about your ratings?<span class="opt-note">Optional</span></div>
+          <textarea data-field="ratings_note" placeholder="What stood out, good or bad…"></textarea>
+        </div>
+
+        <button class="btn" data-next>Next →</button>
+        <button class="back" data-back>← Back</button>
+      </div></section>
+
+      <!-- STEP 3 — OPEN FEEDBACK -->
+      <section class="step" data-step="3"><div class="pad">
+        <div class="secttag">This summer</div>
+        <h2>Tell us more</h2>
+        <p class="sub small">All optional — but this is the good stuff.</p>
+
+        <div class="qblock">
+          <div class="qlabel">What did we do well?<span class="opt-note">Optional</span></div>
+          <textarea data-field="did_well" placeholder=""></textarea>
+        </div>
+        <div class="qblock">
+          <div class="qlabel">What could we do better?<span class="opt-note">Optional</span></div>
+          <textarea data-field="do_better" placeholder=""></textarea>
+        </div>
+        <div class="qblock">
+          <div class="qlabel">Anything on the coaching — Coach John or Coach Regan?<span class="opt-note">Optional</span></div>
+          <textarea data-field="coaching" placeholder=""></textarea>
+        </div>
+
+        <button class="btn" data-next>Next →</button>
+        <button class="back" data-back>← Back</button>
+      </div></section>
+
+      <!-- STEP 4 — WHAT'S NEXT -->
+      <section class="step" data-step="4"><div class="pad">
+        <div class="secttag">What you want next</div>
+        <h2>What should we run?</h2>
+        <p class="sub small">Help us build the right thing.</p>
+
+        <div class="qblock">
+          <div class="qlabel">Would you want another off-season training block? (summer / winter)</div>
+          <div class="choices" data-field="offseason">
+            <button data-val="Yes">Yes</button><button data-val="Maybe">Maybe</button><button data-val="No">No</button>
+          </div>
+        </div>
+        <div class="qblock">
+          <div class="qlabel">Would you be interested in an in-season option too?</div>
+          <div class="choices" data-field="inseason">
+            <button data-val="Yes">Yes</button><button data-val="Maybe">Maybe</button><button data-val="No">No</button>
+          </div>
+        </div>
+        <div class="qblock">
+          <div class="qlabel">Best night (in-season)?</div>
+          <div class="choices" data-field="night">
+            <button data-val="Friday">Friday</button><button data-val="Sunday">Sunday</button>
+            <button data-val="Either">Either</button><button data-val="Neither">Neither</button>
+          </div>
+        </div>
+        <div class="qblock">
+          <div class="qlabel">Would you rather…</div>
+          <div class="choices" data-field="format">
+            <button data-val="Full block">Commit to a full block</button>
+            <button data-val="Drop-in">Drop in per session</button>
+            <button data-val="Either">Either is fine</button>
+          </div>
+        </div>
+        <div class="qblock">
+          <div class="qlabel">Anything else you'd want in-season?<span class="opt-note">Optional</span></div>
+          <textarea data-field="inseason_note" placeholder=""></textarea>
+        </div>
+
+        <button class="btn" data-next>Next →</button>
+        <button class="back" data-back>← Back</button>
+      </div></section>
+
+      <!-- STEP 5 — COMPETITIVE TEAMS -->
+      <section class="step" data-step="5"><div class="pad">
+        <div class="secttag">Factory 5 Futsal</div>
+        <h2>Competitive travel teams</h2>
+        <div class="explain">
+          We're exploring <b>Factory 5 Futsal competitive teams</b>. We'd hold tryouts and build teams by age group and turnout, train at least once a week, and travel to compete in the <b>summer and winter</b> — regionals and nationals. We just want to know if it's something you'd be interested in.
+        </div>
+        <div class="qblock">
+          <div class="qlabel" id="q_comp">Would you be interested in your athlete trying out?</div>
+          <div class="choices" data-field="comp_interest">
+            <button data-val="Yes, definitely">Yes, definitely</button>
+            <button data-val="Maybe, send me more">Maybe, send me more</button>
+            <button data-val="No">No</button>
+          </div>
+        </div>
+        <div class="qblock">
+          <div class="qlabel">Anything you want to add?<span class="opt-note">Optional</span></div>
+          <textarea data-field="comp_note" placeholder=""></textarea>
+        </div>
+
+        <button class="btn" id="submitBtn" data-submit>Send my feedback</button>
+        <button class="back" data-back>← Back</button>
+      </div></section>
+
+      <!-- STEP 6 — THANK YOU -->
+      <section class="step" data-step="6"><div class="pad center">
+        <div class="tick">✓</div>
+        <h2>Got it — thank you!</h2>
+        <p class="sub" id="thanksSub">This means a lot. Your feedback goes straight to Coach John, and it shapes exactly what we run next. See you on the court.</p>
+        <div class="tag" style="opacity:.7">Factory 5 Futsal · Futbol Factory</div>
+      </div></section>
+
+    </div>
+    <div class="tag" style="text-align:center;opacity:.6">Factory 5 Futsal · Nashville, TN</div>
+  </div>
+
+<script>
+  var WEBHOOK = "https://futbolfactory.app.n8n.cloud/webhook/ff-futsal-feedback";
+  var data = {};
+
+  // Pull identity from the personalized link (cid, parent first name, athlete name)
+  (function(){
+    var q = new URLSearchParams(location.search);
+    data.cid   = q.get("cid")   || "";
+    data.parent= q.get("p")     || "";
+    data.child = q.get("c")     || "";
+    var childCap = data.child ? data.child.charAt(0).toUpperCase()+data.child.slice(1) : "";
+    var parentCap= data.parent ? data.parent.charAt(0).toUpperCase()+data.parent.slice(1) : "";
+    if(parentCap){
+      document.getElementById("welcomeSub").innerHTML =
+        "Hey "+esc(parentCap)+" — Coach John here. We just wrapped the eight-week summer block, and before Regan and I plan what's next, I want your honest take on how it went"+(childCap?" for "+esc(childCap):"")+". The good and the stuff we can do better. Takes about two minutes.";
+    }
+    if(childCap){
+      document.getElementById("welcomeHead").textContent = "How did summer futsal go for "+childCap+"?";
+      document.getElementById("q_child").textContent = "How much "+childCap+" enjoyed it";
+      document.getElementById("q_comp").textContent = "Would you be interested in "+childCap+" trying out?";
+      document.getElementById("thanksSub").textContent = "This means a lot. Your feedback goes straight to Coach John, and it shapes exactly what we run next. See you and "+childCap+" on the court.";
+    }
+  })();
+  function esc(s){return (s+"").replace(/[<>&"]/g,function(c){return {"<":"&lt;",">":"&gt;","&":"&amp;",'"':"&quot;"}[c];});}
+
+  // Build 1-5 rating rows
+  document.querySelectorAll(".rate").forEach(function(row){
+    var field=row.dataset.field;
+    for(var i=1;i<=5;i++){
+      (function(n){
+        var b=document.createElement("button");b.textContent=n;
+        b.onclick=function(){
+          row.querySelectorAll("button").forEach(function(x){x.classList.remove("sel");});
+          b.classList.add("sel");data[field]=n;
+        };
+        row.appendChild(b);
+      })(i);
+    }
+  });
+
+  // Single-choice pill groups
+  document.querySelectorAll(".choices").forEach(function(grp){
+    var field=grp.dataset.field;
+    grp.querySelectorAll("button").forEach(function(b){
+      b.onclick=function(){
+        grp.querySelectorAll("button").forEach(function(x){x.classList.remove("sel");});
+        b.classList.add("sel");data[field]=b.dataset.val;
+      };
+    });
+  });
+
+  // Text fields
+  document.querySelectorAll("textarea[data-field]").forEach(function(t){
+    t.addEventListener("input",function(){data[t.dataset.field]=t.value.trim();});
+  });
+
+  // Navigation
+  var steps=[].slice.call(document.querySelectorAll(".step")), total=steps.length, cur=1;
+  function show(n){cur=n;steps.forEach(function(s){s.classList.toggle("active",+s.dataset.step===n);});
+    document.getElementById("bar").style.width=Math.round((n-1)/(total-1)*100)+"%";
+    window.scrollTo({top:0,behavior:"smooth"});}
+  document.querySelectorAll("[data-next]").forEach(function(b){b.onclick=function(){show(cur+1);};});
+  document.querySelectorAll("[data-back]").forEach(function(b){b.onclick=function(){show(cur-1);};});
+
+  // Submit
+  var btn=document.getElementById("submitBtn");
+  document.querySelector("[data-submit]").onclick=function(){
+    data.submitted_at=new Date().toISOString();
+    btn.disabled=true;btn.textContent="Sending…";
+    fetch(WEBHOOK,{method:"POST",body:new URLSearchParams(data)})
+      .catch(function(){})
+      .finally(function(){show(6);});
+  };
+</script>
+</body>
+</html>
